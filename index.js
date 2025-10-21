@@ -1,9 +1,7 @@
 const express = require("express")
 const path = require("path")
-const {Router} = require("express")
-
+const router = require("./routes/formrouter")
 const PORT = 8000;
-
 const messages = [
     {
         text: "Hi There !",
@@ -17,16 +15,19 @@ const messages = [
     },
 ];
 const app = express();
+//set view engine
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs")
 
-app.get("/", (req, res) => {
-  res.render(path.join(__dirname, "views", "index"), { title: "Mini Messageboard", messages: messages })
-});
-  
-app.get("/new", (req, res) => {
+//parses form data to req.body or sum
+app.use("/new", router)
+app.use(express.urlencoded({ extended: true }));
 
+//app
+app.get("/", (req, res) => {
+  res.render("index", { title: "Mini Messageboard", messages: messages })
 });
+
 app.listen(PORT, (error) => {
     if(error) {
         throw error;

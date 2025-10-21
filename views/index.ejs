@@ -3,7 +3,11 @@
            <h1>  <%= title %> </h1> 
         <ul>
             <% for (let i =0; i < messages.length; i++) { %>
-                <h2> <%= messages[i].text %> </h2>
+                <div style="display: flex; gap: 12px;">
+                    <h2> <%= messages[i].text %> </h2>
+                    <a href="/messages/<%= i %>">Open</a>
+                </div>
+                
             <% }%>
         </ul>
         <a href="/new">Add Message Here!</a>

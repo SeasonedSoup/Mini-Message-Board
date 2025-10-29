@@ -8,7 +8,7 @@ const SQL = `
         date DATE
     );
 
-    INSERT INTO messages (text, user, date) 
+    INSERT INTO messages (text, username, date) 
     VALUES 
         ('I like waffles', 'Bryan', '2025-10-28'),
         ('Hello World!', 'Odin', '2022-07-22'),

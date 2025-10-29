@@ -1,15 +1,11 @@
 const {Router} = require("express")
 const router = Router()
 
-module.exports = 
-    router.get("/", (req, res) => {
-        res.render("form")
-    })
-    /*  */
-    router.post("/", (req, res) => {
-        const messageUser = req.body.authorName
-        const messageText = req.body.message
-        messages.push({ text: messageText, user: messageUser, added: new Date() });
-        res.redirect("/")
-    })
-    return router
+const db = require("../db/queries");
+router.get("/", (req, res) => { res.render("form") });
+router.post("/", (req, res) => {
+    const { authorName, message } = req.body;
+    db.createMessage(authorName, message)
+    res.redirect("/");
+});
+module.exports = router;

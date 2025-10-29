@@ -1,9 +1,12 @@
 const db = require("../db/queries")
 
-export function getMessageForm(req, res) {
+ function getMessageForm(req, res) {
     res.render("form")
 }
 
-export async function getAllMessages() {
-    
+async function getMessages() {
+    const messages = await db.getAllMessages();
+    res.render("index", { title: "Mini Messageboard", messages: messages })
 }
+
+module.exports = {getMessageForm, getMessages}

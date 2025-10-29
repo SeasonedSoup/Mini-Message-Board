@@ -2,22 +2,13 @@ const express = require("express")
 const path = require("path")
 
 const PORT = 8000;
-const messages = [
-    {
-        text: "Hi There !",
-        user: "John",
-        added: new Date()
-    },
-    {
-        text: "Hello World !",
-        user: "Charles",
-        added: new Date()
-    },
-];
 
-const router = require("./routes/formrouter")(messages)
+const router = require("./routes/formrouter")
 const app = express();
 //set view engine
+
+const messageController = require('./controllers/controller')
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs")
 
@@ -25,16 +16,8 @@ app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }));
 app.use("/new", router)
 
-
 //app
-app.get("/", (req, res) => {
-  res.render("index", { title: "Mini Messageboard", messages: messages })
-});
-
-app.get("/messages/:id", (req, res) => {
-    const message = messages[req.params.id]
-    res.render("details", {message})
-})
+app.get("/", messageController.getMessages);
 
 app.listen(PORT, (error) => {
     if(error) {

@@ -1,11 +1,11 @@
 const {Router} = require("express")
 const router = Router()
 
-module.exports = (messages) => {
+module.exports = 
     router.get("/", (req, res) => {
         res.render("form")
     })
-    
+    /*  */
     router.post("/", (req, res) => {
         const messageUser = req.body.authorName
         const messageText = req.body.message
@@ -13,4 +13,3 @@ module.exports = (messages) => {
         res.redirect("/")
     })
     return router
-} ;
